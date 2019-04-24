@@ -15,22 +15,22 @@ class MyApp extends StatelessWidget {
           title: Text(title),
         ),
         body: Center(
-          child: FutureBuilder(
+          child: FutureBuilder<List<Item>>(
             future: provider.getUser(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 //checks if the response returns valid data
-                var values = snapshot.data as List;
-                print("#########################################");
-                print(values.runtimeType);
-                print("#########################################");
+                //var values = snapshot.data as List;
+                //print("#########################################");
+                //print(values.runtimeType);
+                //print("#########################################");
                 return new ListView.builder(
-                  itemCount: values.length,
+                  itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return new Column(
                       children: <Widget>[
                         new ListTile(
-                          title: new Text(values[index]['abrangenciaDefinidaDecisaoJudicial']),
+                          title: new Text(snapshot.data[index].quote),
                         ),
                         new Divider(
                           height: 2.0,

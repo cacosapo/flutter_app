@@ -1,4 +1,3 @@
-
 class ItemList {
   final List<Item> items;
 
@@ -7,11 +6,12 @@ class ItemList {
   });
 
   factory ItemList.fromJson(List<dynamic> parsedJson) {
-
     List<Item> items = new List<Item>();
 
+    items = parsedJson.map((i)=> Item.fromJson(i)).toList();
+
     return new ItemList(
-       items: items,
+      items: items,
     );
   }
 }
@@ -22,10 +22,15 @@ class Item {
 
   Item({this.author, this.quote});
 
+  @override
+  String toString() => "author - " + this.author + "quote - " + this.quote;
+
   factory Item.fromJson(Map<String, dynamic> json) {
-    print(json);
-    return Item(
-        author: json['id'],
-        quote: json['dataReferencia']);
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    
+    Item temp = Item(
+        author: json['dataFimSancao'], quote: json['dataTransitadoJulgado']);
+    print(temp.toString());
+    return temp;
   }
 }
