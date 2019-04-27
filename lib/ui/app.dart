@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:transparencia/models/items.dart';
+import 'package:transparencia/models/model.dart';
 import 'package:transparencia/repository/portal_api_provider.dart';
 
 class MyApp extends StatelessWidget {
@@ -7,30 +7,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = 'Basic List';
-
+    
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: title,
       home: Scaffold(
         appBar: AppBar(
           title: Text(title),
         ),
         body: Center(
-          child: FutureBuilder<List<Item>>(
-            future: provider.getUser(),
+          child: FutureBuilder<List<Cartao>>(
+            future: provider.getCartao(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                //checks if the response returns valid data
-                //var values = snapshot.data as List;
-                //print("#########################################");
-                //print(values.runtimeType);
-                //print("#########################################");
                 return new ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return new Column(
                       children: <Widget>[
                         new ListTile(
-                          title: new Text(snapshot.data[index].quote),
+                          title: new Text(snapshot.data[index].valorTransacao + " - " + snapshot.data[index].tipoCartaoDescricao),
                         ),
                         new Divider(
                           height: 2.0,
